@@ -7,11 +7,13 @@ from typing import (
     Optional,
 )
 
-from app.domain.entities.wildberries import WildBerriesProduct
+from app.domain.aggregates.product_marketplace import ProductMarketPlace
+from app.domain.entities.marketplace import Marketplace
+from app.domain.entities.product import Product
 from app.infrastructure.repositories.base import AbstractRepository
 
 
-class WildBerriesProductsRepository(AbstractRepository[WildBerriesProduct], ABC):
+class ProductMarketPlaceRepository(AbstractRepository[ProductMarketPlace], ABC):
     """
     An interface for work with WildBerries products, that is used by books unit of work.
     The main goal is that implementations of this interface can be easily replaced in users unit of work
@@ -19,29 +21,33 @@ class WildBerriesProductsRepository(AbstractRepository[WildBerriesProduct], ABC)
     """
 
     @abstractmethod
-    async def get_by_link(self, link: str) -> Optional[WildBerriesProduct]:
+    async def get_by_link(self, link: str) -> Optional[ProductMarketPlace]:
         raise NotImplementedError
 
     @abstractmethod
-    async def get_by_article(self, article: int) -> Optional[WildBerriesProduct]:
+    async def get_by_product_and_marketplace(
+            self,
+            product: Product,
+            market_place: Marketplace
+    ) -> Optional[ProductMarketPlace]:
         raise NotImplementedError
 
     @abstractmethod
-    async def add(self, model: WildBerriesProduct) -> WildBerriesProduct:
+    async def add(self, model: ProductMarketPlace) -> ProductMarketPlace:
         raise NotImplementedError
 
     @abstractmethod
-    async def get(self, article: int) -> Optional[WildBerriesProduct]:
+    async def get(self, oid: str) -> Optional[ProductMarketPlace]:
         raise NotImplementedError
 
     @abstractmethod
-    async def update(self, article: int, model: WildBerriesProduct) -> WildBerriesProduct:
+    async def update(self, oid: str, model: ProductMarketPlace) -> ProductMarketPlace:
         raise NotImplementedError
 
     @abstractmethod
-    async def delete(self, article: int) -> None:
+    async def delete(self, oid: str) -> None:
         raise NotImplementedError
 
     @abstractmethod
-    def list(self) -> List[WildBerriesProduct]:
+    def list(self) -> List[ProductMarketPlace]:
         raise NotImplementedError
