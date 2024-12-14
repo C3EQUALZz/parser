@@ -9,6 +9,8 @@ from typing import (
     TypeVar,
 )
 
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.domain.entities.base import BaseEntity
 
 BaseEntityType = TypeVar("BaseEntityType", bound=BaseEntity)
@@ -41,3 +43,13 @@ class AbstractRepository(ABC, Generic[BaseEntityType]):
     @abstractmethod
     async def list(self) -> List[BaseEntityType]:
         raise NotImplementedError
+
+
+class SQLAlchemyAbstractRepository(AbstractRepository, ABC):
+    """
+    Repository interface for SQLAlchemy, from which should be inherited all other repositories,
+    which would be based on SQLAlchemy logics.
+    """
+
+    def __init__(self, session: AsyncSession) -> None:
+        self._session: AsyncSession = session
