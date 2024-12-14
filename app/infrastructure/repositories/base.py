@@ -23,21 +23,21 @@ class AbstractRepository(ABC, Generic[BaseEntityType]):
     """
 
     @abstractmethod
-    def add(self, model: BaseEntityType) -> BaseEntityType:
+    async def add(self, model: BaseEntityType) -> BaseEntityType:
         raise NotImplementedError
 
     @abstractmethod
-    def get(self, oid: str) -> Optional[BaseEntityType]:
+    async def get(self, oid: str) -> Optional[BaseEntityType]:
         raise NotImplementedError
 
     @abstractmethod
-    def update(self, oid: str, model: BaseEntityType) -> BaseEntityType:
+    async def update(self, oid: str, model: BaseEntityType) -> BaseEntityType:
         raise NotImplementedError
 
     @abstractmethod
-    def delete(self, oid: str) -> None:
+    async def delete(self, oid: str) -> None:
         raise NotImplementedError
 
     @abstractmethod
-    def list(self) -> List[BaseEntityType]:
+    async def list(self) -> List[BaseEntityType]:
         raise NotImplementedError
