@@ -19,27 +19,27 @@ class WildBerriesProductsRepository(AbstractRepository[WildBerriesProduct], ABC)
     """
 
     @abstractmethod
-    def get_by_title(self, title: str) -> Optional[WildBerriesProduct]:
+    async def get_by_link(self, link: str) -> Optional[WildBerriesProduct]:
         raise NotImplementedError
 
     @abstractmethod
-    def get_by_title_and_author(self, title: str, author: str) -> Optional[WildBerriesProduct]:
+    async def get_by_article(self, article: int) -> Optional[WildBerriesProduct]:
         raise NotImplementedError
 
     @abstractmethod
-    def add(self, model: WildBerriesProduct) -> WildBerriesProduct:
+    async def add(self, model: WildBerriesProduct) -> WildBerriesProduct:
         raise NotImplementedError
 
     @abstractmethod
-    def get(self, oid: str) -> Optional[WildBerriesProduct]:
+    async def get(self, article: int) -> Optional[WildBerriesProduct]:
         raise NotImplementedError
 
     @abstractmethod
-    def update(self, oid: str, model: WildBerriesProduct) -> WildBerriesProduct:
+    async def update(self, article: int, model: WildBerriesProduct) -> WildBerriesProduct:
         raise NotImplementedError
 
     @abstractmethod
-    def delete(self, oid: str) -> None:
+    async def delete(self, article: int) -> None:
         raise NotImplementedError
 
     @abstractmethod

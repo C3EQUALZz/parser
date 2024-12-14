@@ -20,15 +20,15 @@ class Link(BaseValueObject[str]):
 
 
 @dataclass(frozen=True)
-class Article(BaseValueObject[str]):
-    value: str
+class Article(BaseValueObject[int]):
+    value: int
 
     @override
     def validate(self) -> None:
         ...
 
     @override
-    def as_generic_type(self) -> str:
+    def as_generic_type(self) -> int:
         return self.value
 
 
