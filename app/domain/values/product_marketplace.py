@@ -41,3 +41,16 @@ class FeedBacks(BaseValueObject[List[str]]):
     @override
     def as_generic_type(self) -> List[str]:
         return self.value
+
+
+@dataclass(frozen=True)
+class Price(BaseValueObject[int]):
+    value: int
+
+    @override
+    def validate(self) -> None:
+        ...
+
+    @override
+    def as_generic_type(self) -> int:
+        return self.value
