@@ -31,15 +31,15 @@ class Rating(BaseValueObject[int]):
 
 
 @dataclass(frozen=True)
-class FeedBacks(BaseValueObject[List[str]]):
-    value: List[str]
+class CountOfFeedBacks(BaseValueObject[int]):
+    value: int
 
     @override
     def validate(self) -> None:
         ...
 
     @override
-    def as_generic_type(self) -> List[str]:
+    def as_generic_type(self) -> int:
         return self.value
 
 

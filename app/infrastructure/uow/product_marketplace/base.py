@@ -4,7 +4,7 @@ from app.infrastructure.repositories.product_marketplace.base import ProductMark
 from app.infrastructure.uow.base import AbstractUnitOfWork
 
 
-class ProductsMarketUnitOfWork(AbstractUnitOfWork, ABC):
+class ProductsMarketPlaceUnitOfWork(AbstractUnitOfWork, ABC):
     """
     An interface for work with books, that is used by service layer of books module.
     The main goal is that implementations of this interface can be easily replaced in the service layer

@@ -48,8 +48,7 @@ class SQLAlchemyAbstractUnitOfWork(AbstractUnitOfWork):
     Unit of work interface for SQLAlchemy, from which should be inherited all other units of work,
     which would be based on SQLAlchemy logics.
     """
-
-    def __init__(self, session_factory: async_sessionmaker = default_session_factory) -> None:
+    def __init__(self, session_factory: async_sessionmaker) -> None:
         super().__init__()
         self._session_factory: async_sessionmaker = session_factory
 

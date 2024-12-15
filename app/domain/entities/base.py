@@ -24,8 +24,6 @@ class BaseEntity(ABC):
     """
 
     oid: str = field(default_factory=lambda: str(uuid4()), kw_only=True)
-    created_at: datetime = field(default_factory=lambda: datetime.now(UTC), kw_only=True)
-    updated_at: datetime = field(default_factory=lambda: datetime.now(UTC), kw_only=True)
 
     def __post_init__(self) -> None:
         for field_name, field_type in get_type_hints(self).items():

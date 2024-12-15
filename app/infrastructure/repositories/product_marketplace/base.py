@@ -49,5 +49,5 @@ class ProductMarketPlaceRepository(AbstractRepository[ProductMarketPlace], ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def list(self) -> List[ProductMarketPlace]:
+    async def list(self) -> List[ProductMarketPlace]:
         raise NotImplementedError

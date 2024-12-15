@@ -45,7 +45,7 @@ class AbstractRepository(ABC, Generic[BaseEntityType]):
         raise NotImplementedError
 
 
-class SQLAlchemyAbstractRepository(AbstractRepository, ABC):
+class SQLAlchemyAbstractRepository(AbstractRepository[BaseEntityType], ABC):
     """
     Repository interface for SQLAlchemy, from which should be inherited all other repositories,
     which would be based on SQLAlchemy logics.

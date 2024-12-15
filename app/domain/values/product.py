@@ -6,7 +6,7 @@ from app.domain.values.base import BaseValueObject
 
 @dataclass(frozen=True)
 class ProductName(BaseValueObject[str]):
-    name: str
+    value: str
 
     @override
     def validate(self) -> None:
