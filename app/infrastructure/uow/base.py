@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from dataclasses import field
-from typing import List, Generator
+from traceback import TracebackException
+from typing import List, Generator, Optional, Type
 from typing import Self
 
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
@@ -19,7 +20,12 @@ class AbstractUnitOfWork(ABC):
     async def __aenter__(self) -> Self:
         return self
 
-    async def __aexit__(self, *args, **kwargs) -> None:
+    async def __aexit__(
+            self,
+            exc_type: Optional[Type[BaseException]],
+            exc_value: Optional[BaseException],
+            traceback: Optional[TracebackException]
+    ) -> None:
         await self.rollback()
 
     @abstractmethod
@@ -48,16 +54,20 @@ class SQLAlchemyAbstractUnitOfWork(AbstractUnitOfWork):
     Unit of work interface for SQLAlchemy, from which should be inherited all other units of work,
     which would be based on SQLAlchemy logics.
     """
-    def __init__(self, session_factory: async_sessionmaker) -> None:
+
+    def __init__(self, session_factory: async_sessionmaker[AsyncSession]) -> None:
         super().__init__()
-        self._session_factory: async_sessionmaker = session_factory
+        self._session_factory = session_factory
 
     async def __aenter__(self) -> Self:
         self._session: AsyncSession = self._session_factory()
         return await super().__aenter__()
 
-    async def __aexit__(self, *args, **kwargs) -> None:
-        await super().__aexit__(*args, **kwargs)
+    async def __aexit__(self,
+                        exc_type: Optional[Type[BaseException]],
+                        exc_value: Optional[BaseException],
+                        traceback: Optional[TracebackException]) -> None:
+        await super().__aexit__(exc_type, exc_value, traceback)
         await self._session.close()
 
     async def commit(self) -> None:
