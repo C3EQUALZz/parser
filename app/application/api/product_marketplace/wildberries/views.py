@@ -11,5 +11,10 @@ class WildberriesView:
 
     async def get_products_by_name(self, name: str) -> List[ProductMarketPlace]:
         wildberries_service: WildberriesService = WildberriesService(self._parser)
-        products: List[ProductMarketPlace] = await wildberries_service.get_products_with_name(name)
+        products: List[ProductMarketPlace] = await wildberries_service.get_products_with_name(name=name)
         return products
+
+    async def get_product_by_article(self, article: str) -> ProductMarketPlace:
+        wildberries_service: WildberriesService = WildberriesService(self._parser)
+        product: ProductMarketPlace = await wildberries_service.get_product_by_article(article=article)
+        return product

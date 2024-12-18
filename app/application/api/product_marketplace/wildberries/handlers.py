@@ -8,13 +8,12 @@ from starlette import status
 
 from app.application.api.error_schemas import ErrorSchema
 from app.application.api.product_marketplace.wildberries.schemas import (
-    ProductMarketPlaceRequestSchema,
     ProductMarketPlaceResponseSchema,
 )
 from app.application.api.product_marketplace.wildberries.views import WildberriesView
 from app.domain.aggregates.product_marketplace import ProductMarketPlace
 from app.exceptions import ApplicationException
-from app.infrastructure.services.parsers.product_marketplace.wildberries.request.keyword import (
+from app.infrastructure.services.parsers.product_marketplace.wildberries.request.name import (
     WildBerriesParserByNameRequest,
 )
 from app.infrastructure.utils.fetchers.aio_http import AiohttpFetcher
@@ -44,16 +43,16 @@ async def get_products_by_name(product_name: str) -> List[ProductMarketPlaceResp
 
 
 @router.get(
-    path="/{article}",
+    path="/products/article/{article}",
     status_code=status.HTTP_200_OK,
     description='Get product by article from wildberries which user provide'
 )
-async def get_product_by_id(article: str):
+async def get_product_by_article(article: str):
     ...
 
 
 @router.get(
-    path="/{category_name}",
+    path="/products/category/{category_name}",
     status_code=status.HTTP_200_OK,
     description='Get all products from category wildberries which user provide'
 )
@@ -62,7 +61,7 @@ async def get_products_by_category(category_name: str):
 
 
 @router.get(
-    path="/{brand_name}",
+    path="/products/brand/{brand_name}",
     status_code=status.HTTP_200_OK,
     description='Get all products from brand'
 )

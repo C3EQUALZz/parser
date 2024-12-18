@@ -1,11 +1,8 @@
 from typing import Self
 
-from app.domain.aggregates.product_marketplace import ProductMarketPlace
 from pydantic import BaseModel
 
-
-class ProductMarketPlaceRequestSchema(BaseModel):
-    name: str
+from app.domain.aggregates.product_marketplace import ProductMarketPlace
 
 
 class ProductMarketPlaceResponseSchema(BaseModel):

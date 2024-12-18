@@ -18,7 +18,7 @@ class WildberriesService:
     async def get_products_by_category(self, category: str) -> List[ProductMarketPlace]:
         return await self._parser.parse(category=category)
 
-    async def get_product_details_by_article(self, article: str) -> ProductMarketPlace:
+    async def get_product_by_article(self, article: str) -> ProductMarketPlace:
         return await self._parser.parse(article=article)
 
     async def get_popular_products(self) -> List[ProductMarketPlace]:
