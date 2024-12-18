@@ -1,5 +1,5 @@
-from typing import Dict, Any
 from dataclasses import dataclass, field
+from typing import Dict, Any
 
 from app.domain.aggregates.base import BaseAggregateRoot
 from app.domain.entities.marketplace import Marketplace
@@ -29,11 +29,14 @@ class ProductMarketPlace(BaseAggregateRoot):
             else int(item['priceU'] / 100)
         )
 
+        name_market_place = NameOfMarketplace("wildberries")
+        url_market_place = MarketPlaceUrl("https://www.wildberries.ru")
+
         return cls(
-            product=Product(ProductName(item['name'])),
-            marketplace=Marketplace(name=NameOfMarketplace("wildberries"), url=MarketPlaceUrl("https://www.wildberries.ru")),
+            product=Product(ProductName(item.get('name', ""))),
+            marketplace=Marketplace(name=name_market_place, url=url_market_place),
             price=price,
-            link=Link(f"https://www.wildberries.ru/catalog/{item['id']}/detail.aspx"),
-            count_of_feedbacks=CountOfFeedBacks(item['feedbacks']),
-            rating=Rating(item["rating"]),
+            link=Link(f"https://www.wildberries.ru/catalog/{item.get('id')}/detail.aspx"),
+            count_of_feedbacks=CountOfFeedBacks(item.get('feedbacks', 0)),
+            rating=Rating(item.get("rating", 0)),
         )

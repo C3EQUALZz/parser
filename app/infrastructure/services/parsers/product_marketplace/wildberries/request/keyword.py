@@ -7,15 +7,15 @@ from app.domain.aggregates.product_marketplace import ProductMarketPlace
 from app.infrastructure.services.parsers.product_marketplace.wildberries.base import AbstractWildBerriesParser
 
 
-class WildBerriesParserByKeyWordRequest(AbstractWildBerriesParser):
+class WildBerriesParserByNameRequest(AbstractWildBerriesParser):
     @override
-    async def parse(self, key_word: str, pages_count: int = 3) -> List[ProductMarketPlace]:
+    async def parse(self, name: str, pages_count: int = 3) -> List[ProductMarketPlace]:
         products = []
 
         for page in range(1, pages_count + 1):
             url = (f"https://search.wb.ru/exactmatch/ru/common/v4/search?"
                    f"appType=1&curr=rub&dest=-1257786&page={page}"
-                   f"&query={'%20'.join(key_word.split())}&resultset=catalog"
+                   f"&query={'%20'.join(name.split())}&resultset=catalog"
                    f"&sort=popular&spp=24&suppressSpellcheck=false")
             products.extend(await self.__get_products(url=url))
 

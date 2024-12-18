@@ -61,3 +61,6 @@ class Config(BaseSettings):
 
     database: DatabaseConfig = DatabaseConfig()
     alchemy: SQLAlchemyConfig = SQLAlchemyConfig()
+
+
+config: Config = Config()

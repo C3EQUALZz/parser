@@ -6,6 +6,7 @@ from typing import Self
 
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
 
+from app.infrastructure.connection import session_factory as default_session_factory
 from app.logic.events.base import AbstractEvent
 
 
@@ -55,7 +56,7 @@ class SQLAlchemyAbstractUnitOfWork(AbstractUnitOfWork):
     which would be based on SQLAlchemy logics.
     """
 
-    def __init__(self, session_factory: async_sessionmaker[AsyncSession]) -> None:
+    def __init__(self, session_factory: async_sessionmaker[AsyncSession] = default_session_factory) -> None:
         super().__init__()
         self._session_factory = session_factory
 
